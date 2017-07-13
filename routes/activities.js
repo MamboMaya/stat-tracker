@@ -5,7 +5,7 @@ const Tracker = require('../models/schema.js').Tracker
 const bodyParser = require('body-parser')
 
 // show list of all activities being tracked by user
-router.get('/activities', function (req, res) {
+router.get('/api/activities', function (req, res) {
   Account.findOne({
     _id: req.user._id
   })
@@ -29,7 +29,7 @@ router.get('/activities', function (req, res) {
 })
 
 // create a new activity to track
-router.post('/activities', function (req, res) {
+router.post('/api/activities', function (req, res) {
   const tracker = new Tracker()
   tracker.userId = req.user._id
   tracker.activity = req.body.activity

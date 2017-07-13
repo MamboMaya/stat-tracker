@@ -1,0 +1,22 @@
+* {
+box-sizing: border-box;
+margin: 0 auto;
+font-family: sans-serif;
+}
+
+img {
+  max-width: 100%;
+}
+
+.sign-up-or-in {
+  display: flex;
+  flex-direction: row;
+}
+
+.registration {
+  flex-basis: 60%;
+}
+
+.sign-in {
+  flex-basis: 40%;
+}

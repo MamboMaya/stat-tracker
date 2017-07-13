@@ -1,4 +1,5 @@
 const express = require('express')
+const mustache = require('mustache-express')
 const app = express()
 const passport = require('passport')
 const BasicStrategy = require('passport-http').BasicStrategy
@@ -9,6 +10,9 @@ const registerRoutes = require('./routes/register')
 const activitiesRoutes = require('./routes/activities')
 const statsRoutes = require('./routes/stats')
 
+app.engine('mustache', mustache())
+app.set('view engine', 'mustache')
+app.set('layout', 'layout') // defines layout.musatache as the the layout file
 app.use(express.static('public'))
 app.use(bodyParser.json())
 mongoose.Promise = require('bluebird')

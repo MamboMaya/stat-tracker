@@ -9,7 +9,7 @@ const trackerSchema = new mongoose.Schema({
   userId: {type: String, required: true},
   activity: {type: String, required: true},
   unit: {type: String, required: true},
-  log: [{
+  stats: [{
     date: {type: String},
     record: {type: Number}
   }]
