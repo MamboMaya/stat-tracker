@@ -58,22 +58,35 @@ router.delete('/api/activities/:id', function (req, res) {
 })
 
 // add tracked data for a day
-// TODO: Add functionality for overriding data from a day already input
 router.post('/api/activities/:id/stats', function (req, res) {
   Tracker.findOne({
     _id: req.params.id
   })
   .then(function (tracker) {
-    tracker.stats.push({
-      date: req.body.date,
-      record: req.body.record
-    })
+    let statFound = false
+    let position = 0
+    for (var i = 0; i < tracker.stats.length; i++) {
+      if (tracker.stats[i].date === req.body.date) {
+        statFound = true
+        position = i
+      }
+    }
+    if (statFound) {
+      tracker.stats[position].record = req.body.record
+    } else {
+      tracker.stats.push({
+        date: req.body.date,
+        record: req.body.record
+      })
+    }
     tracker.save()
   })
   .then(function (tracker) {
+    console.log(tracker)
     res.status(200).json({tracker: tracker})
   })
   .catch(function (error) {
+    console.log('failure')
     res.status(404).json({error: error})
   })
 })
